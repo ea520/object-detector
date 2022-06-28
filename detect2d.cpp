@@ -22,7 +22,7 @@ int main(int argc, const char **argv)
         .implicit_value(true)
         .default_value(false);
     program.add_argument("--weights")
-        .help("Path to the weights. The .xml and .bin files should have the same name. If ./weights/best.bin and ./weights/best.xml exist, the input path should be /weights/best")
+        .help("Path to the weights. The .xml and .bin files should have the same name.If ./weights/best.bin and ./weights/best.xml exist, the input path should be ./weights/best")
         .default_value(std::string("./weights/best"));
 
     try
@@ -91,7 +91,6 @@ int main(int argc, const char **argv)
             inference_time = cumulative_time / frame_count; // 1000 * 1000 * 1000 * frame_count / cumulative_time;
             frame_count = 0;
             cumulative_time = 0;
-            // std::cout << fps << std::endl;
         }
         cv::putText(frame, std::to_string(inference_time) + "ms inference", {25, 460}, cv::FONT_HERSHEY_DUPLEX, 1.0, {0, 0, 0}, 2);
         cv::imshow("Detections", frame);

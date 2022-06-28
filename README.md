@@ -1,51 +1,25 @@
 # object-detector
 ## Ububtu18+ install
-### Install easier dependencies
-```bash
-sudo apt-get install libmlpack-dev libzbar-dev
-```
-#### Install intel's inference engine [instructions here](https://docs.openvino.ai/2022.1/openvino_docs_install_guides_installing_openvino_apt.html):
- ```bash
-wget https://apt.repos.intel.com/intel-gpg-keys/
-```
-```bash
-GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-```
-```bash
-sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-```
-```bash
-echo "deb https://apt.repos.intel.com/openvino/2022 bionic main" | sudo tee /etc/apt/sources.list.d/intel-openvino-2022.list
-```
-```bash
-sudo apt update && sudo apt install openvino openvino-opencv 
-```
-```bash
-cd /opt/intel/openvino_2022/install_dependencies/
-sudo -E ./install_NEO_OCL_driver.sh -y # support for iGPU
-```
-
-#### Compile the code
+Clone the repository
 ```bash
 git clone https://github.com/ea520/object-detector
+```
+```bash
 cd object-detector
 ```
+Install the dependencies
 ```bash
-source /opt/intel/openvino_2022/setupvars.sh
+# required packages: libmlpack-dev libzbar-dev openvino openvino-opencv
+./install-dependencies.sh
 ```
+Compile the code 
 ```bash
-cmake -S . -B temp -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=$(pwd) -DCMAKE_BUILD_TYPE=release
+# sudo apt-get install g++-11
+CXX=g++-11 # or any other compiler that supports c++17 (g++-7 probably won't work)
+./compile.sh
 ```
+
+Run the code 
 ```bash
-cmake --build temp
-```
-```bash
-rm -r temp
-```
-## Run the programme
-```bash
-source /opt/intel/openvino_2022/setupvars.sh
-```
-```bash
-./detect --GPU # use "./detect -h" for extra command line options
+./detect.sh # "./detect.sh --help" will show the command line options
 ```
