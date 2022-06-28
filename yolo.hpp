@@ -67,7 +67,7 @@ namespace yolo
     };
 
     cv::Mat format_yolov5(const cv::Mat &source);
-    void load_net(cv::dnn::Net &net, int target=cv::dnn::DNN_TARGET_OPENCL_FP16);
+    void load_net(cv::dnn::Net &net, const std::string &path, int target);
     std::vector<Detection> detect(const cv::Mat &image, cv::dnn::Net &net);
     void draw_qrs(const zbar::Image &image, cv::Mat &frame);
     void draw_boxes(const std::vector<Detection> &detections, cv::Mat &frame);

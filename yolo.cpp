@@ -20,9 +20,8 @@ namespace yolo
         return result;
     }
 
-    void load_net(cv::dnn::Net &net, int target)
+    void load_net(cv::dnn::Net &net, const std::string &path, int target)
     {
-        std::string path = "./weights/best";
         std::string bin_path{path + ".bin"}, xml_path{path + ".xml"};
         std::ifstream bin{bin_path}, xml{xml_path};
         assert(bin.is_open() && xml.is_open());

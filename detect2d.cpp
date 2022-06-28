@@ -8,31 +8,36 @@ int main(int argc, const char **argv)
 {
     argparse::ArgumentParser program("detect");
     program.add_argument("-i", "--index")
-           .help("The camera index")
-           .scan<'i', int>()
-           .default_value(0);
-    
+        .help("The camera index")
+        .scan<'i', int>()
+        .default_value(0);
+
     program.add_argument("-t", "--frame_time")
-           .help("The target duration of a frame in ms")
-           .scan<'u', unsigned>()
-           .default_value(100);
-    
-    program.add_argument("--GPU")
+        .help("The target duration of a frame in ms")
+        .scan<'u', unsigned>()
+        .default_value(100);
+
+    program.add_argument("--GPU", "--gpu")
         .help("Whether to use the GPU")
         .implicit_value(true)
         .default_value(false);
-    
-    try{
+    program.add_argument("--weights")
+        .help("Path to the weights. The .xml and .bin files should have the same name. If ./weights/best.bin and ./weights/best.xml exist, the input path should be /weights/best")
+        .default_value(std::string("./weights/best"));
+
+    try
+    {
         program.parse_args(argc, argv);
     }
-    catch (std::runtime_error& e){
+    catch (std::runtime_error &e)
+    {
         std::cerr << e.what() << std::endl;
         std::cerr << program;
         return -1;
     }
 
-    int frame_time = program.get<int>("t");
-    yolo::load_net(net, program.get<bool>("GPU") ? cv::dnn::DNN_TARGET_OPENCL_FP16 : cv::dnn::DNN_TARGET_CPU);
+    unsigned frame_time = program.get<unsigned>("t");
+    yolo::load_net(net, program.get<std::string>("weights"), program.get<bool>("GPU") ? cv::dnn::DNN_TARGET_OPENCL_FP16 : cv::dnn::DNN_TARGET_CPU);
     int index = program.get<int>("i");
     cv::VideoCapture cap(index);
 
