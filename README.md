@@ -14,8 +14,8 @@ Install the dependencies
 ```
 Compile the code 
 ```bash
-# sudo apt-get install g++-11
-CXX=g++-11 # or any other compiler that supports c++17 (g++-7 probably won't work)
+# sudo apt-get install g++-8
+CXX=g++-8 # or any other compiler that supports c++17 (g++-7 probably won't work)
 ./compile.sh
 ```
 
