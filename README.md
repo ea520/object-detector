@@ -31,6 +31,9 @@ git clone https://github.com/ea520/object-detector
 cd object-detector
 ```
 ```bash
+source /opt/intel/openvino_2022/setupvars.sh
+```
+```bash
 cmake -S . -B temp -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=$(pwd) -DCMAKE_BUILD_TYPE=release
 ```
 ```bash
@@ -38,4 +41,11 @@ cmake --build temp
 ```
 ```bash
 rm -r temp
+```
+## Run the programme
+```bash
+source /opt/intel/openvino_2022/setupvars.sh
+```
+```bash
+./detect --GPU # use "./detect -h" for extra command line options
 ```
