@@ -14,7 +14,7 @@ int main(int argc, const char **argv)
 
     program.add_argument("-t", "--frame_time")
         .help("The target duration of a frame in ms")
-        .scan<'u', unsigned>()
+        .scan<'i', int>()
         .default_value(100);
 
     program.add_argument("--GPU", "--gpu")
@@ -22,7 +22,7 @@ int main(int argc, const char **argv)
         .implicit_value(true)
         .default_value(false);
     program.add_argument("--weights")
-        .help("Path to the weights. The .xml and .bin files should have the same name.If ./weights/best.bin and ./weights/best.xml exist, the input path should be ./weights/best")
+        .help("Path to the weights. The .xml and .bin files should have the same name. If ./weights/best.bin and ./weights/best.xml exist, the input path should be ./weights/best")
         .default_value(std::string("./weights/best"));
 
     try
@@ -36,7 +36,7 @@ int main(int argc, const char **argv)
         return -1;
     }
 
-    unsigned frame_time = program.get<unsigned>("t");
+    int frame_time = program.get<int>("t");
     yolo::load_net(net, program.get<std::string>("weights"), program.get<bool>("GPU") ? cv::dnn::DNN_TARGET_OPENCL_FP16 : cv::dnn::DNN_TARGET_CPU);
     int index = program.get<int>("i");
     cv::VideoCapture cap(index);
