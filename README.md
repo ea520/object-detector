@@ -1,5 +1,5 @@
 # object-detector
-## Linux install
+## Ububtu18+ install
 ### Install easier dependencies
 ```bash
 sudo apt-get install libmlpack-dev libzbar-dev
